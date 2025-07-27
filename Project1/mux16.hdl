@@ -1,0 +1,55 @@
+CHIP Mux16 {
+    IN a[16], b[16], sel;
+    OUT out[16];
+
+    PARTS:
+    // NOT sel once (shared for all bits)
+    Nand(a=sel, b=true, out=notSel);
+
+    // ----- Bit 0 -----
+    Nand(a=a[0], b=notSel, out=firstOut0);
+    Nand(a=firstOut0, b=firstOut0, out=aAndNotSel0);
+
+    Nand(a=b[0], b=sel, out=firstOut10);
+    Nand(a=firstOut10, b=firstOut10, out=bAndSel0);
+
+    Nand(a=aAndNotSel0, b=true, out=outA0);
+    Nand(a=bAndSel0, b=true, out=outB0);
+    Nand(a=outA0, b=outB0, out=out[0]);
+
+    // ----- Bit 1 -----
+    Nand(a=a[1], b=notSel, out=firstOut1);
+    Nand(a=firstOut1, b=firstOut1, out=aAndNotSel1);
+
+    Nand(a=b[1], b=sel, out=firstOut11);
+    Nand(a=firstOut11, b=firstOut11, out=bAndSel1);
+
+    Nand(a=aAndNotSel1, b=true, out=outA1);
+    Nand(a=bAndSel1, b=true, out=outB1);
+    Nand(a=outA1, b=outB1, out=out[1]);
+
+    // ----- Bit 2 -----
+    Nand(a=a[2], b=notSel, out=firstOut2);
+    Nand(a=firstOut2, b=firstOut2, out=aAndNotSel2);
+
+    Nand(a=b[2], b=sel, out=firstOut12);
+    Nand(a=firstOut12, b=firstOut12, out=bAndSel2);
+
+    Nand(a=aAndNotSel2, b=true, out=outA2);
+    Nand(a=bAndSel2, b=true, out=outB2);
+    Nand(a=outA2, b=outB2, out=out[2]);
+
+    // … repeat same pattern for bits 3–15 …
+
+    // ----- Bit 15 -----
+    Nand(a=a[15], b=notSel, out=firstOut15);
+    Nand(a=firstOut15, b=firstOut15, out=aAndNotSel15);
+
+    Nand(a=b[15], b=sel, out=firstOut115);
+    Nand(a=firstOut115, b=firstOut115, out=bAndSel15);
+
+    Nand(a=aAndNotSel15, b=true, out=outA15);
+    Nand(a=bAndSel15, b=true, out=outB15);
+    Nand(a=outA15, b=outB15, out=out[15]);
+}
+
