@@ -1,0 +1,80 @@
+
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/1/Or16.hdl
+/**
+ * 16-bit Or gate:
+ * for i = 0, ..., 15:
+ * out[i] = a[i] Or b[i] 
+ */
+CHIP Or16 {
+    IN a[16], b[16];
+    OUT out[16];
+
+    PARTS:
+    //// Replace this comment with your code.
+    Nand(a=a[0], b=true, out=temp00);
+    Nand(a=b[0], b=true, out=temp01);
+    Nand(a=temp00, b=temp01, out=out[0]);
+
+    Nand(a=a[1], b=true, out=temp10);
+    Nand(a=b[1], b=true, out=temp11);
+    Nand(a=temp10, b=temp11, out=out[1]);
+
+    Nand(a=a[2], b=true, out=temp20);
+    Nand(a=b[2], b=true, out=temp21);
+    Nand(a=temp20, b=temp21, out=out[2]);
+
+    Nand(a=a[3], b=true, out=temp30);
+    Nand(a=b[3], b=true, out=temp31);
+    Nand(a=temp30, b=temp31, out=out[3]);
+
+    Nand(a=a[4], b=true, out=temp40);
+    Nand(a=b[4], b=true, out=temp41);
+    Nand(a=temp40, b=temp41, out=out[4]);
+
+    Nand(a=a[5], b=true, out=temp50);
+    Nand(a=b[5], b=true, out=temp51);
+    Nand(a=temp50, b=temp51, out=out[5]);
+
+    Nand(a=a[6], b=true, out=temp60);
+    Nand(a=b[6], b=true, out=temp61);
+    Nand(a=temp60, b=temp61, out=out[6]);
+
+    Nand(a=a[7], b=true, out=temp70);
+    Nand(a=b[7], b=true, out=temp71);
+    Nand(a=temp70, b=temp71, out=out[7]);
+
+    Nand(a=a[8], b=true, out=temp80);
+    Nand(a=b[8], b=true, out=temp81);
+    Nand(a=temp80, b=temp81, out=out[8]);
+
+    Nand(a=a[9], b=true, out=temp90);
+    Nand(a=b[9], b=true, out=temp91);
+    Nand(a=temp90, b=temp91, out=out[9]);
+
+    Nand(a=a[10], b=true, out=temp100);
+    Nand(a=b[10], b=true, out=temp101);
+    Nand(a=temp100, b=temp101, out=out[10]);
+
+    Nand(a=a[11], b=true, out=temp110);
+    Nand(a=b[11], b=true, out=temp111);
+    Nand(a=temp110, b=temp111, out=out[11]);
+
+    Nand(a=a[12], b=true, out=temp120);
+    Nand(a=b[12], b=true, out=temp121);
+    Nand(a=temp120, b=temp121, out=out[12]);
+
+    Nand(a=a[13], b=true, out=temp130);
+    Nand(a=b[13], b=true, out=temp131);
+    Nand(a=temp130, b=temp131, out=out[13]);
+
+    Nand(a=a[14], b=true, out=temp140);
+    Nand(a=b[14], b=true, out=temp141);
+    Nand(a=temp140, b=temp141, out=out[14]);
+
+    Nand(a=a[15], b=true, out=temp150);
+    Nand(a=b[15], b=true, out=temp151);
+    Nand(a=temp150, b=temp151, out=out[15]);
+}
