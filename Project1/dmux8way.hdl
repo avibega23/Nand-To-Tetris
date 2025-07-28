@@ -1,0 +1,36 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/1/DMux8Way.hdl
+
+/**
+ * 8-way demultiplexor:
+ * [a, b, c, d, e, f, g, h] = [in, 0,  0,  0,  0,  0,  0,  0] if sel = 000
+ *                            [0, in,  0,  0,  0,  0,  0,  0] if sel = 001
+ *                            [0,  0, in,  0,  0,  0,  0,  0] if sel = 010
+ *                            [0,  0,  0, in,  0,  0,  0,  0] if sel = 011
+ *                            [0,  0,  0,  0, in,  0,  0,  0] if sel = 100
+ *                            [0,  0,  0,  0,  0, in,  0,  0] if sel = 101
+ *                            [0,  0,  0,  0,  0,  0, in,  0] if sel = 110
+ *                            [0,  0,  0,  0,  0,  0,  0, in] if sel = 111
+ */
+
+CHIP DMux8Way {
+    IN in, sel[3];
+    OUT a, b, c, d, e, f, g, h;
+
+    PARTS:
+    // First stage: split input into two halves (sel[2] decides top vs bottom 4)
+    DMux(in=in, sel=sel[2], a=top, b=bottom);
+
+    // Second stage: split each half into 2 more (sel[1] decides within each half)
+    DMux(in=top, sel=sel[1], a=topLeft, b=topRight);
+    DMux(in=bottom, sel=sel[1], a=bottomLeft, b=bottomRight);
+
+    // Third stage: split each of the 4 lines into 2 (sel[0] decides final output)
+    DMux(in=topLeft, sel=sel[0], a=a, b=b);
+    DMux(in=topRight, sel=sel[0], a=c, b=d);
+    DMux(in=bottomLeft, sel=sel[0], a=e, b=f);
+    DMux(in=bottomRight, sel=sel[0], a=g, b=h);
+}
+
